@@ -31,6 +31,8 @@ def player_input():
             # grid[0][int(input_column)] = " X "
         except IndexError:
             print("Enter a value between 0 and 6")
+        except ValueError:
+            print("Enter a number between 0 and 6")
         else:
             waiting_player_input = False
     def check_place_position():
@@ -43,17 +45,13 @@ def player_input():
                 print(f" {i} is blank")
                 token_drop_position = i
                 grid[i][int(input_column)] = " X "
-                break
-        
-        
-        
-        
+                break #only place one token
+        update_grid()
     check_place_position()
+    player_input()
 
 
 test()
 
 player_input()
 
-
-update_grid()
