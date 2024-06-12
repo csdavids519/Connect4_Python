@@ -22,6 +22,17 @@ def update_grid():
             print(grid[c][r], end=" ")
         print("")
 
+
+
+def player_input():
+    input_colum = input("enter a colum number: ")
+    grid[2][int(input_colum)] = " X "
+    
+    
+    
+    
 create_new_grid()
+
+player_input()
 
 update_grid()
