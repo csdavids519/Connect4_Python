@@ -1,44 +1,59 @@
-# Make a game grid 
 
 grid_row_size = 7
-grid_colum_size = 6
-grid = [[0 for r in range(grid_row_size)] for c in range(grid_colum_size)]
+grid_column_size = 6
+grid = [["[_]" for r in range(grid_row_size)] for c in range(grid_column_size)]
 
 token_positions = [[]]
 
-
-def create_new_grid():
-    for c in range(grid_colum_size):
-        for r in range(grid_row_size):
-            grid[c][r]= "[_]"
-        # print(c," ",grid[c])  #only for debug
+token_drop_position = 0
 
 def update_grid():
     """
     draw grid with updated player move
     """
-    for c in range(grid_colum_size):
+    for c in range(grid_column_size):
         for r in range(grid_row_size):
             print(grid[c][r], end=" ")
         print("")
 
 
 
+def test():
+    grid[5][4] = " o "
+    grid[4][4] = " o "
+    grid[3][4] = " o "
+
 def player_input():
     waiting_player_input = True
     while waiting_player_input:
         try:
-            input_colum = input("enter a colum number: ")
-            grid[2][int(input_colum)] = " X "
+            input_column = input("enter a column number: ")
+            # grid[0][int(input_column)] = " X "
         except IndexError:
             print("Enter a value between 0 and 6")
         else:
             waiting_player_input = False
-    
-    
-    
-create_new_grid()
+    def check_place_position():
+        """
+        check each row in the users selected column starting at the bottom, find the first empty position
+        """
+        nonlocal input_column
+        for i in range(5, 0, -1):
+            if grid[i][int(input_column)] == "[_]":
+                print(f" {i} is blank")
+                token_drop_position = i
+                grid[i][int(input_column)] = " X "
+                break
+        
+        
+        
+        
+    check_place_position()
+
+
+test()
 
 player_input()
+
 
 update_grid()
