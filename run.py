@@ -25,9 +25,15 @@ def update_grid():
 
 
 def player_input():
-    input_colum = input("enter a colum number: ")
-    grid[2][int(input_colum)] = " X "
-    
+    waiting_player_input = True
+    while waiting_player_input:
+        try:
+            input_colum = input("enter a colum number: ")
+            grid[2][int(input_colum)] = " X "
+        except IndexError:
+            print("Enter a value between 0 and 6")
+        else:
+            waiting_player_input = False
     
     
     
