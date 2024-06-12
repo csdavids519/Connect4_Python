@@ -5,7 +5,6 @@ grid = [["[_]" for r in range(grid_row_size)] for c in range(grid_column_size)]
 
 token_positions = [[]]
 
-token_drop_position = 0
 
 def update_grid():
     """
@@ -40,12 +39,13 @@ def player_input():
         check each row in the users selected column starting at the bottom, find the first empty position
         """
         nonlocal input_column
-        for i in range(5, 0, -1):
+        for i in range(5, -1, -1):
             if grid[i][int(input_column)] == "[_]":
-                print(f" {i} is blank")
-                token_drop_position = i
+                print(f" {i} is blank")  #debug
                 grid[i][int(input_column)] = " X "
                 break #only place one token
+            elif (i == 0) and grid[i][int(input_column)] != "[_]":
+                print("this column is full, pick another")
         update_grid()
     check_place_position()
     player_input()
