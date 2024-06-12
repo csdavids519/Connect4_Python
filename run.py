@@ -1,5 +1,27 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
-print("hello world")
-print("test git from linux")
+# Make a game grid 
+
+grid_row_size = 7
+grid_colum_size = 6
+grid = [[0 for r in range(grid_row_size)] for c in range(grid_colum_size)]
+
+token_positions = [[]]
+
+
+def create_new_grid():
+    for c in range(grid_colum_size):
+        for r in range(grid_row_size):
+            grid[c][r]= "[_]"
+        # print(c," ",grid[c])  #only for debug
+
+def update_grid():
+    """
+    draw grid with updated player move
+    """
+    for c in range(grid_colum_size):
+        for r in range(grid_row_size):
+            print(grid[c][r], end=" ")
+        print("")
+
+create_new_grid()
+
+update_grid()
