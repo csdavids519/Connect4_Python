@@ -1,7 +1,7 @@
 
 grid_row_size = 7
 grid_column_size = 6
-grid = [["[_]" for r in range(grid_row_size)] for c in range(grid_column_size)]
+grid = [["[_]" for c in range(grid_column_size)] for r in range(grid_row_size)]  
 
 token_positions = [[]]
 
@@ -9,9 +9,17 @@ input_column = 0
 
 
 def test():
-    grid[5][4] = " o "
+    #grid[row][col]
+    grid[4][5] = " o "
     grid[4][4] = " o "
-    grid[3][4] = " o "
+    grid[4][3] = " o "
+    
+    
+    
+    
+
+
+
 
 def player_input():
     """
@@ -41,11 +49,11 @@ def check_place_position():
     Check each row in the users selected column starting at the bottom, find the first empty position
     """
     for i in range(5, -1, -1):
-        if grid[i][int(input_column)] == "[_]":
+        if grid[int(input_column)][i] == "[_]":
             print(f" {i} is blank")  #debug
-            grid[i][int(input_column)] = " X "
+            grid[int(input_column)][i] = " X "
             break #only place one token
-        elif (i == 0) and grid[i][int(input_column)] != "[_]":
+        elif (i == 0) and grid[int(input_column)][i] != "[_]":
             print("this column is full, pick another")
     update_grid()
 
@@ -55,9 +63,26 @@ def update_grid():
     """
     for c in range(grid_column_size):
         for r in range(grid_row_size):
-            print(grid[c][r], end=" ")
+            print(grid[r][c], end=" ")
         print("")
-    player_input()
+    check_winner()
+
+
+def check_winner():
+    """
+    Check for a game win or change player
+    """
+
+    # check horizontal 
+    
+
+
+
+
+
+
+
+
 
 
 
@@ -71,7 +96,6 @@ player_input()
 
 """ thursday
 
-fix error checkibng
 add pc player
 add check for win
 """
