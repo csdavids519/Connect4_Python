@@ -6,6 +6,10 @@ grid = [["[_]" for y in range(rowy_size)] for x in range(columnx_size)]
 input_column = 0
 player = "User"
     
+print("**************************************************************")
+print("****                 WELCOME TO CONNECT 4                 ****")
+print("**** Pick a column number and try to get 4 'X's' in a row ****")
+print("**************************************************************")    
     
 def player_input():
     """
@@ -20,7 +24,7 @@ def player_input():
     print("")   
     
     while waiting_player_input:
-        input_column = input("Enter a column number: ")
+        input_column = input("Enter a column number between 0 and 6: ")
         try:
             input_column = int(input_column)
         except ValueError:
@@ -50,12 +54,12 @@ def pc_player():
     """
     PC player easy setting picks column at random
     """
-    
+    print("")   
     print("")   
     print("*******************************")
     print("**** PC player turn ****")
     print("*******************************")
-    print("")   
+
             
     check_row = True
     pc_choice = random.randint(0,6)
