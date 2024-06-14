@@ -1,7 +1,7 @@
 
-grid_row_size = 6
-grid_column_size = 7
-grid = [["[_]" for c in range(grid_column_size)] for r in range(grid_row_size)]  
+columnx_size, rowy_size = 7,6
+
+grid = [["[_]" for y in range(rowy_size)] for x in range(columnx_size)]
 
 token_position_row = 0
 token_position_col = 0
@@ -10,10 +10,8 @@ input_column = 0
 
 
 def test():
-    #grid[row][col]
-    grid[4][5] = " o "
-    grid[4][4] = " o "
-    grid[4][3] = " o "
+
+    grid[6][5] = " @ "
     
     print(grid)
     
@@ -58,15 +56,18 @@ def check_place_position():
             print("this column is full, pick another")
     update_grid()
 
+
 def update_grid():
     """
-    draw grid with updated player move
+    draw grid array in a user readable format
     """
-    for r in range(grid_column_size):
-        for c in range(grid_row_size):
-            print(grid[r][c], end=" ")
-        print("")
+    
+    for row in range(rowy_size):
+        for col in range(columnx_size):
+            print(grid[col][row], end=" ")
+        print("")   
     check_winner()
+
 
 
 def check_winner():
@@ -78,33 +79,47 @@ def check_winner():
     global token_position_col
 
     # check horizontal 
-    for y in range(grid_row_size):
-        for x in range(grid_column_size -3):
-            if (grid[x][y] == " X " and grid[x+1][y] == " X " and grid[x+2][y] == " X " and grid[x+3][y] == " X "):
-                print(f"x winner {x}")
-                return True
-            
+
+    for y in range(rowy_size):
+        for x in range(columnx_size):
+            try:
+                if (grid[x][y] == " X " and grid[x+1][y] == " X " and grid[x+2][y] == " X " and grid[x+3][y] == " X "):
+                    print(f"x winner {x}")
+                    return True
+            except IndexError:
+                print(f"IndxeError x:{x} y:{y}")
+                
     # check vertical
-    for y in range(grid_row_size):
-        for x in range(grid_column_size -3):
-            if (grid[x][y] == " X " and grid[x][y+1] == " X " and grid[x][y+2] == " X " and grid[x][y+3] == " X "):
-                print(f"x winner {x}")
-                return True
-            
+    for y in range(rowy_size):
+        for x in range(columnx_size):
+            try:
+                if (grid[x][y] == " X " and grid[x][y+1] == " X " and grid[x][y+2] == " X " and grid[x][y+3] == " X "):
+                    print(f"x winner {x}")
+                    return True
+            except IndexError:
+                print(f"IndxeError x:{x} y:{y}")
+                
     # check diagonal top right to bottom left
-    for y in range(grid_row_size -3):
-        for x in range(3, grid_column_size):
-            if (grid[x][y] == " X " and grid[x+1][y-1] == " X " and grid[x+2][y-2] == " X " and grid[x+3][y-3] == " X "):
-                print(f"x winner {x}")
-                return True
+    for y in range(rowy_size -3): 
+        for x in range(3, columnx_size):        #columnx_size, rowy_size = 7,6
+            try:
+                if (grid[x][y] == " X " and grid[x+1][y-1] == " X " and grid[x+2][y-2] == " X " and grid[x+3][y-3] == " X "):
+                    print(f"x winner {x}")
+                    return True
+            except IndexError:
+                print(f"IndxeError x:{x} y:{y}")
+                
             
     # check diagonal top left to bottom right
-    for y in range(grid_row_size -3):
-        for x in range(grid_column_size - 3):
-            if (grid[x][y] == " X " and grid[x+1][y+1] == " X " and grid[x+2][y+2] == " X " and grid[x+3][y+3] == " X "):
-                print(f"x winner {x}")
-                return True
-            
+    for y in range(rowy_size -3):
+        for x in range(columnx_size - 3):
+            try:
+                if (grid[x][y] == " X " and grid[x+1][y+1] == " X " and grid[x+2][y+2] == " X " and grid[x+3][y+3] == " X "):
+                    print(f"x winner {x}")
+                    return True
+            except IndexError:
+                print(f"IndxeError x:{x} y:{y}")
+                
     player_input()
 
 
