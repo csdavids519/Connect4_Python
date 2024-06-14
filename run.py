@@ -1,16 +1,20 @@
 import random
 
-columnx_size, rowy_size = 7,6
+columnx_size, rowy_size = 7,7
 grid = [["[_]" for y in range(rowy_size)] for x in range(columnx_size)]
 
+# add row with column identifers 
+for i in range(columnx_size):
+    grid[i][6] = f"[{i}]"
+
 input_column = 0
-player = "User"
+player = "PC"
     
 print("**************************************************************")
 print("****                 WELCOME TO CONNECT 4                 ****")
 print("**** Pick a column number and try to get 4 'X's' in a row ****")
 print("**************************************************************")    
-    
+
 def player_input():
     """
     Check payer input value is int and in rage of the game grid
@@ -18,10 +22,10 @@ def player_input():
     global input_column
     waiting_player_input = True
     print("")   
+    print("")   
     print("*******************************")
     print("**** Your turn! ****")
     print("*******************************")
-    print("")   
     
     while waiting_player_input:
         input_column = input("Enter a column number between 0 and 6: ")
@@ -60,7 +64,6 @@ def pc_player():
     print("**** PC player turn ****")
     print("*******************************")
 
-            
     check_row = True
     pc_choice = random.randint(0,6)
 
@@ -90,7 +93,7 @@ def update_grid():
 def check_winner():
     """
     Check for a game win or change player
-    - code reference modified from Shaun Halverson example see readme for link
+    * code reference modified from Shaun Halverson example see readme for link
     """
     tokens = [" O ", " X "]
     winner_found = False
@@ -102,9 +105,6 @@ def check_winner():
                 try:
                     if (grid[x][y] == token and grid[x+1][y] == token and grid[x+2][y] == token and grid[x+3][y] == token):
                         winner_found = True
-                        
-                        # print(f"Winner {token}")
-                        # return
                 except IndexError:
                     continue
                 
@@ -141,13 +141,13 @@ def check_winner():
     if winner_found:
         print("")   
         print("*******************************")
-        print(f"****     Winner {token} !!  ****")
+        print("*******************************")
+        print(f"****     Winner: {player} !!  ****")
+        print("*******************************")
         print("*******************************")
         print("")
         return   
-        
     change_player()
-
 
 def change_player():
     """
@@ -161,4 +161,5 @@ def change_player():
         player = "User"
         player_input()
         
-player_input()
+# Start game here with printing blank game grid
+update_grid()
