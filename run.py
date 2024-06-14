@@ -104,50 +104,55 @@ def check_winner():
     Check for a game win or change player
     - code reference modified from Shaun Halverson example see readme for link
     """
-
+    tokens = [" O ", " X "]
+    
     # check horizontal 
-    for y in range(rowy_size):
-        for x in range(columnx_size):
-            try:
-                if (grid[x][y] == " X " and grid[x+1][y] == " X " and grid[x+2][y] == " X " and grid[x+3][y] == " X "):
-                    print(f"x winner {x}")
-                    return True
-            except IndexError:
-                # print(f"IndxeError x:{x} y:{y}")
-                continue
+    for token in tokens:
+        for y in range(rowy_size):
+            for x in range(columnx_size):
+                try:
+                    if (grid[x][y] == token and grid[x+1][y] == token and grid[x+2][y] == token and grid[x+3][y] == token):
+                        print(f"Winner {token}")
+                        return True
+                except IndexError:
+                    # print(f"IndxeError x:{x} y:{y}")
+                    continue
                 
     # check vertical
-    for y in range(rowy_size):
-        for x in range(columnx_size):
-            try:
-                if (grid[x][y] == " X " and grid[x][y+1] == " X " and grid[x][y+2] == " X " and grid[x][y+3] == " X "):
-                    print(f"x winner {x}")
-                    return True
-            except IndexError:
-                # print(f"IndxeError x:{x} y:{y}")
-                continue
+    for token in tokens:
+        for y in range(rowy_size):
+            for x in range(columnx_size):
+                try:
+                    if (grid[x][y] == " X " and grid[x][y+1] == " X " and grid[x][y+2] == " X " and grid[x][y+3] == " X "):
+                        print(f"x winner {x}")
+                        return True
+                except IndexError:
+                    # print(f"IndxeError x:{x} y:{y}")
+                    continue
                 
     # check diagonal top left to bottom right
-    for y in range(rowy_size): 
-        for x in range(columnx_size):
-            try:
-                if (grid[x][y] == " X " and grid[x+1][y-1] == " X " and grid[x+2][y-2] == " X " and grid[x+3][y-3] == " X "):
-                    print(f"x winner {x}")
-                    return True
-            except IndexError:
-                # print(f"IndxeError x:{x} y:{y}")
-                continue
+    for token in tokens:
+        for y in range(rowy_size): 
+            for x in range(columnx_size):
+                try:
+                    if (grid[x][y] == " X " and grid[x+1][y-1] == " X " and grid[x+2][y-2] == " X " and grid[x+3][y-3] == " X "):
+                        print(f"x winner {x}")
+                        return True
+                except IndexError:
+                    # print(f"IndxeError x:{x} y:{y}")
+                    continue
                 
     # check diagonal top right to bottom left
-    for y in range(rowy_size):
-        for x in range(columnx_size):
-            try:
-                if (grid[x][y] == " X " and grid[x-1][y-1] == " X " and grid[x-2][y-2] == " X " and grid[x-3][y-3] == " X "):
-                    print(f"x winner {x}")
-                    return True
-            except IndexError:
-                # print(f"IndxeError x:{x} y:{y}")
-                continue
+    for token in tokens:
+        for y in range(rowy_size):
+            for x in range(columnx_size):
+                try:
+                    if (grid[x][y] == " X " and grid[x-1][y-1] == " X " and grid[x-2][y-2] == " X " and grid[x-3][y-3] == " X "):
+                        print(f"x winner {x}")
+                        return True
+                except IndexError:
+                    # print(f"IndxeError x:{x} y:{y}")
+                    continue
     pc_player()
 
 
