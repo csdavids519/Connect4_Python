@@ -100,6 +100,7 @@ def check_winner():
     - code reference modified from Shaun Halverson example see readme for link
     """
     tokens = [" O ", " X "]
+    winner_found = False
     
     # check horizontal 
     for token in tokens:
@@ -107,8 +108,10 @@ def check_winner():
             for x in range(columnx_size):
                 try:
                     if (grid[x][y] == token and grid[x+1][y] == token and grid[x+2][y] == token and grid[x+3][y] == token):
-                        print(f"Winner {token}")
-                        return True
+                        winner_found = True
+                        
+                        # print(f"Winner {token}")
+                        # return
                 except IndexError:
                     continue
                 
@@ -118,8 +121,7 @@ def check_winner():
             for x in range(columnx_size):
                 try:
                     if (grid[x][y] == token and grid[x][y+1] == token and grid[x][y+2] == token and grid[x][y+3] == token):
-                        print(f"Winner {token}")
-                        return True
+                        winner_found = True
                 except IndexError:
                     continue
                 
@@ -129,8 +131,7 @@ def check_winner():
             for x in range(columnx_size):
                 try:
                     if (grid[x][y] == token and grid[x+1][y-1] == token and grid[x+2][y-2] == token and grid[x+3][y-3] == token):
-                        print(f"Winner {token}")
-                        return True
+                        winner_found = True
                 except IndexError:
                     continue
                 
@@ -140,10 +141,18 @@ def check_winner():
             for x in range(columnx_size):
                 try:
                     if (grid[x][y] == token and grid[x-1][y-1] == token and grid[x-2][y-2] == token and grid[x-3][y-3] == token):
-                        print(f"Winner {token}")
-                        return True
+                        winner_found = True
                 except IndexError:
                     continue
+                
+    if winner_found:
+        print("")   
+        print("*******************************")
+        print(f"****     Winner {token} !!  ****")
+        print("*******************************")
+        print("")
+        return   
+        
     change_player()
 
 
