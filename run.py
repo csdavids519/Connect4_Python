@@ -15,16 +15,22 @@ print("****                 WELCOME TO CONNECT 4                 ****")
 print("**** Pick a column number and try to get 4 'X's' in a row ****")
 print("**************************************************************")    
 
+player_name = ""
+while player_name == "":
+    #get players name
+    player_name = input("Enter your name: ")
+
 def player_input():
     """
     Check payer input value is int and in rage of the game grid
     """
     global input_column
+    global player_name
     waiting_player_input = True
     print("")   
     print("")   
     print("*******************************")
-    print("**** Your turn! ****")
+    print(f"**** {player_name}'s turn! ****")
     print("*******************************")
     
     while waiting_player_input:
@@ -159,11 +165,13 @@ def change_player():
     Manage what player is next
     """
     global player
-    if player == "User":
+    global player_name
+    
+    if player == player_name:
         player = "PC"
         pc_player()
     elif player == "PC":
-        player = "User"
+        player = player_name
         player_input()
         
 # Start game here with printing blank game grid
