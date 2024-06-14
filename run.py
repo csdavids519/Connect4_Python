@@ -52,6 +52,7 @@ def check_place_position():
             break #only place one token
         elif (i == 0) and grid[int(input_column)][i] != "[_]":
             print("this column is full, pick another")
+            player_input()
     update_grid()
 
 def pc_player():
@@ -105,6 +106,7 @@ def check_winner():
                 try:
                     if (grid[x][y] == token and grid[x+1][y] == token and grid[x+2][y] == token and grid[x+3][y] == token):
                         winner_found = True
+                        break
                 except IndexError:
                     continue
                 
@@ -115,6 +117,7 @@ def check_winner():
                 try:
                     if (grid[x][y] == token and grid[x][y+1] == token and grid[x][y+2] == token and grid[x][y+3] == token):
                         winner_found = True
+                        break
                 except IndexError:
                     continue
                 
@@ -125,6 +128,7 @@ def check_winner():
                 try:
                     if (grid[x][y] == token and grid[x+1][y-1] == token and grid[x+2][y-2] == token and grid[x+3][y-3] == token):
                         winner_found = True
+                        break
                 except IndexError:
                     continue
                 
@@ -135,6 +139,7 @@ def check_winner():
                 try:
                     if (grid[x][y] == token and grid[x-1][y-1] == token and grid[x-2][y-2] == token and grid[x-3][y-3] == token):
                         winner_found = True
+                        break
                 except IndexError:
                     continue
                 
