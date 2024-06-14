@@ -6,49 +6,39 @@ grid = [["[_]" for y in range(rowy_size)] for x in range(columnx_size)]
 
 input_column = 0
 
+player = "User"
+
 
 def test():
 
-    grid[0][5] = " @ "
-    grid[0][4] = " @ "
-    grid[0][3] = " @ "
+    # grid[0][5] = " @ "
+    # grid[0][4] = " @ "
+    # grid[0][3] = " @ "
     
     grid[1][5] = " @ "
-    grid[1][4] = " @ "
-    grid[1][3] = " @ "
+    # grid[1][4] = " @ "
+    # grid[1][3] = " @ "
     
     grid[2][5] = " @ "
     grid[2][4] = " @ "
-    grid[2][3] = " @ "
+    # grid[2][3] = " @ "
     
     grid[3][5] = " @ "
     grid[3][4] = " @ "
     grid[3][3] = " @ "
     
-    grid[4][5] = " @ "
-    grid[4][4] = " @ "
-    grid[4][3] = " @ "
+    # grid[4][5] = " @ "
+    # grid[4][4] = " @ "
+    # grid[4][3] = " @ "
     
-    grid[5][5] = " @ "
-    grid[5][4] = " @ "
-    grid[5][3] = " @ "
+    # grid[5][5] = " @ "
+    # grid[5][4] = " @ "
+    # grid[5][3] = " @ "
     
-    grid[6][5] = " @ "
-    grid[6][4] = " @ "
-    grid[6][3] = " @ "
+    # grid[6][5] = " @ "
+    # grid[6][4] = " @ "
+    # grid[6][3] = " @ "
     
-    
-    grid[0][4] = " @ "
-    grid[1][4] = " @ "
-    grid[2][4] = " @ "
-    grid[3][4] = " @ "
-    grid[4][4] = " @ "
-    grid[5][4] = " @ "
-    grid[6][4] = " @ "
-    
-    
-    
-    print(grid)
     
     
 def player_input():
@@ -57,9 +47,14 @@ def player_input():
     """
     global input_column
     waiting_player_input = True
+    print("")   
+    print("*******************************")
+    print("**** Your turn! ****")
+    print("*******************************")
+    print("")   
     
     while waiting_player_input:
-        input_column = input("enter a column number: ")
+        input_column = input("Enter a column number: ")
         try:
             input_column = int(input_column)
         except ValueError:
@@ -77,10 +72,9 @@ def check_place_position():
     """
     Check each row in the users selected column starting at the bottom, find the first empty position
     """
-
+    
     for i in range(5, -1, -1):
         if grid[int(input_column)][i] == "[_]":
-            print(f" {i} is blank")  #debug
             grid[int(input_column)][i] = " X "
             break #only place one token
         elif (i == 0) and grid[int(input_column)][i] != "[_]":
@@ -92,6 +86,7 @@ def update_grid():
     """
     draw grid array in a user readable format
     """
+
     for row in range(rowy_size):
         for col in range(columnx_size):
             print(grid[col][row], end=" ")
@@ -115,7 +110,6 @@ def check_winner():
                         print(f"Winner {token}")
                         return True
                 except IndexError:
-                    # print(f"IndxeError x:{x} y:{y}")
                     continue
                 
     # check vertical
@@ -123,11 +117,10 @@ def check_winner():
         for y in range(rowy_size):
             for x in range(columnx_size):
                 try:
-                    if (grid[x][y] == " X " and grid[x][y+1] == " X " and grid[x][y+2] == " X " and grid[x][y+3] == " X "):
-                        print(f"x winner {x}")
+                    if (grid[x][y] == token and grid[x][y+1] == token and grid[x][y+2] == token and grid[x][y+3] == token):
+                        print(f"Winner {token}")
                         return True
                 except IndexError:
-                    # print(f"IndxeError x:{x} y:{y}")
                     continue
                 
     # check diagonal top left to bottom right
@@ -135,11 +128,10 @@ def check_winner():
         for y in range(rowy_size): 
             for x in range(columnx_size):
                 try:
-                    if (grid[x][y] == " X " and grid[x+1][y-1] == " X " and grid[x+2][y-2] == " X " and grid[x+3][y-3] == " X "):
-                        print(f"x winner {x}")
+                    if (grid[x][y] == token and grid[x+1][y-1] == token and grid[x+2][y-2] == token and grid[x+3][y-3] == token):
+                        print(f"Winner {token}")
                         return True
                 except IndexError:
-                    # print(f"IndxeError x:{x} y:{y}")
                     continue
                 
     # check diagonal top right to bottom left
@@ -147,37 +139,53 @@ def check_winner():
         for y in range(rowy_size):
             for x in range(columnx_size):
                 try:
-                    if (grid[x][y] == " X " and grid[x-1][y-1] == " X " and grid[x-2][y-2] == " X " and grid[x-3][y-3] == " X "):
-                        print(f"x winner {x}")
+                    if (grid[x][y] == token and grid[x-1][y-1] == token and grid[x-2][y-2] == token and grid[x-3][y-3] == token):
+                        print(f"Winner {token}")
                         return True
                 except IndexError:
-                    # print(f"IndxeError x:{x} y:{y}")
                     continue
-    pc_player()
+    change_player()
 
 
 def pc_player():
     """
     PC player easy setting picks column at random
     """
+    
+    print("")   
+    print("*******************************")
+    print("**** PC player turn ****")
+    print("*******************************")
+    print("")   
+            
     check_row = True
     pc_choice = random.randint(0,6)
-    print(pc_choice) # debug
+
     while check_row:
         #check if the PC column choice is not full
         for i in range(5, -1, -1):
             if grid[pc_choice][i] == "[_]":
                 grid[pc_choice][i] = " O "
-                print(f"PC ROW {pc_choice} EMPTY")
                 check_row = False
                 break #only place one token
             elif (i == 0) and grid[pc_choice][i] != "[_]":
-                print(f"PC ROW {pc_choice} FULL")
                 pc_choice = random.randint(0,6)
                 i = 0 # reset for loop
                 continue
-    player_input()
+    update_grid()
 
 
+def change_player():
+    """
+    Manage what player is next
+    """
+    global player
+    if player == "User":
+        player = "PC"
+        pc_player()
+    elif player == "PC":
+        player = "User"
+        player_input()
+        
 test()
 player_input()
