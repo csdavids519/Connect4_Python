@@ -1,29 +1,52 @@
+import random
 
 columnx_size, rowy_size = 7,6
 
 grid = [["[_]" for y in range(rowy_size)] for x in range(columnx_size)]
-
-token_position_row = 0
-token_position_col = 0
 
 input_column = 0
 
 
 def test():
 
+    grid[0][5] = " @ "
+    grid[0][4] = " @ "
+    grid[0][3] = " @ "
+    
     grid[1][5] = " @ "
+    grid[1][4] = " @ "
+    grid[1][3] = " @ "
     
     grid[2][5] = " @ "
     grid[2][4] = " @ "
+    grid[2][3] = " @ "
     
     grid[3][5] = " @ "
     grid[3][4] = " @ "
     grid[3][3] = " @ "
-
+    
     grid[4][5] = " @ "
     grid[4][4] = " @ "
+    grid[4][3] = " @ "
     
     grid[5][5] = " @ "
+    grid[5][4] = " @ "
+    grid[5][3] = " @ "
+    
+    grid[6][5] = " @ "
+    grid[6][4] = " @ "
+    grid[6][3] = " @ "
+    
+    
+    grid[0][4] = " @ "
+    grid[1][4] = " @ "
+    grid[2][4] = " @ "
+    grid[3][4] = " @ "
+    grid[4][4] = " @ "
+    grid[5][4] = " @ "
+    grid[6][4] = " @ "
+    
+    
     
     print(grid)
     
@@ -54,15 +77,11 @@ def check_place_position():
     """
     Check each row in the users selected column starting at the bottom, find the first empty position
     """
-    global token_position_row
-    global token_position_col
 
     for i in range(5, -1, -1):
         if grid[int(input_column)][i] == "[_]":
             print(f" {i} is blank")  #debug
             grid[int(input_column)][i] = " X "
-            token_position_row = i
-            token_position_col = int(input_column)
             break #only place one token
         elif (i == 0) and grid[int(input_column)][i] != "[_]":
             print("this column is full, pick another")
@@ -73,7 +92,6 @@ def update_grid():
     """
     draw grid array in a user readable format
     """
-    
     for row in range(rowy_size):
         for col in range(columnx_size):
             print(grid[col][row], end=" ")
@@ -81,17 +99,13 @@ def update_grid():
     check_winner()
 
 
-
 def check_winner():
     """
     Check for a game win or change player
-    - code reference Shaun Halverson see readme for link
+    - code reference modified from Shaun Halverson example see readme for link
     """
-    global token_position_row
-    global token_position_col
 
     # check horizontal 
-
     for y in range(rowy_size):
         for x in range(columnx_size):
             try:
@@ -99,7 +113,8 @@ def check_winner():
                     print(f"x winner {x}")
                     return True
             except IndexError:
-                print(f"IndxeError x:{x} y:{y}")
+                # print(f"IndxeError x:{x} y:{y}")
+                continue
                 
     # check vertical
     for y in range(rowy_size):
@@ -109,7 +124,8 @@ def check_winner():
                     print(f"x winner {x}")
                     return True
             except IndexError:
-                print(f"IndxeError x:{x} y:{y}")
+                # print(f"IndxeError x:{x} y:{y}")
+                continue
                 
     # check diagonal top left to bottom right
     for y in range(rowy_size): 
@@ -119,7 +135,8 @@ def check_winner():
                     print(f"x winner {x}")
                     return True
             except IndexError:
-                print(f"IndxeError x:{x} y:{y}")
+                # print(f"IndxeError x:{x} y:{y}")
+                continue
                 
     # check diagonal top right to bottom left
     for y in range(rowy_size):
@@ -129,30 +146,33 @@ def check_winner():
                     print(f"x winner {x}")
                     return True
             except IndexError:
-                print(f"IndxeError x:{x} y:{y}")
-                
+                # print(f"IndxeError x:{x} y:{y}")
+                continue
+    pc_player()
+
+
+def pc_player():
+    """
+    PC player easy setting picks column at random
+    """
+    check_row = True
+    pc_choice = random.randint(0,6)
+    print(pc_choice) # debug
+    while check_row:
+        #check if the PC column choice is not full
+        for i in range(5, -1, -1):
+            if grid[pc_choice][i] == "[_]":
+                grid[pc_choice][i] = " O "
+                print(f"PC ROW {pc_choice} EMPTY")
+                check_row = False
+                break #only place one token
+            elif (i == 0) and grid[pc_choice][i] != "[_]":
+                print(f"PC ROW {pc_choice} FULL")
+                pc_choice = random.randint(0,6)
+                i = 0 # reset for loop
+                continue
     player_input()
-
-
-
-
-
-
-
-
-
-
 
 
 test()
 player_input()
-
-
-
-
-
-""" thursday
-
-add pc player
-add check for win
-"""
