@@ -11,7 +11,19 @@ input_column = 0
 
 def test():
 
-    grid[6][5] = " @ "
+    grid[1][5] = " @ "
+    
+    grid[2][5] = " @ "
+    grid[2][4] = " @ "
+    
+    grid[3][5] = " @ "
+    grid[3][4] = " @ "
+    grid[3][3] = " @ "
+
+    grid[4][5] = " @ "
+    grid[4][4] = " @ "
+    
+    grid[5][5] = " @ "
     
     print(grid)
     
@@ -99,9 +111,9 @@ def check_winner():
             except IndexError:
                 print(f"IndxeError x:{x} y:{y}")
                 
-    # check diagonal top right to bottom left
-    for y in range(rowy_size -3): 
-        for x in range(3, columnx_size):        #columnx_size, rowy_size = 7,6
+    # check diagonal top left to bottom right
+    for y in range(rowy_size): 
+        for x in range(columnx_size):
             try:
                 if (grid[x][y] == " X " and grid[x+1][y-1] == " X " and grid[x+2][y-2] == " X " and grid[x+3][y-3] == " X "):
                     print(f"x winner {x}")
@@ -109,12 +121,11 @@ def check_winner():
             except IndexError:
                 print(f"IndxeError x:{x} y:{y}")
                 
-            
-    # check diagonal top left to bottom right
-    for y in range(rowy_size -3):
-        for x in range(columnx_size - 3):
+    # check diagonal top right to bottom left
+    for y in range(rowy_size):
+        for x in range(columnx_size):
             try:
-                if (grid[x][y] == " X " and grid[x+1][y+1] == " X " and grid[x+2][y+2] == " X " and grid[x+3][y+3] == " X "):
+                if (grid[x][y] == " X " and grid[x-1][y-1] == " X " and grid[x-2][y-2] == " X " and grid[x-3][y-3] == " X "):
                     print(f"x winner {x}")
                     return True
             except IndexError:
