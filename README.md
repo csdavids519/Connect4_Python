@@ -1,4 +1,4 @@
-# *Connect 4x*
+# **Connect 4x**
 
 ---
 ![welcome](documentation/images/welcome.png)
@@ -31,15 +31,18 @@ You can employ some strategic moves and think about how to best block your oppon
 ### Existing Features
 
 - Accepts user player name input
+
 ![welcome](documentation/images/welcome.png)
 
 - Continuous checking for winner
+
 ![winner](documentation/images/winner.png)
 
 - Play against the computer
 - Input validations during game play
   - the user may not enter values over the game grid size
   - the user must enter an integer, no letters, or blank entry
+
 ![inputerrors](documentation/images/inputerrors.png)
 
 ### Future Features
