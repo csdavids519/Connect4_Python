@@ -1,15 +1,15 @@
 # *Connect 4x*
 
 ---
-![LOGO](logo)
+![welcome](documentation/images/welcome.png)
 
 'Connect 4x' is a Python game running deployed with Heroku using the Code Institute terminal template.
 
 Users can play against the computer and try to be the first to connect four of their game tokens in a row.
 
-The live version can be found here.
+The live version can be found here: [Connect 4X](https://connect4-2024-a3eeac48a194.herokuapp.com/)
 
-![RESPONSIVE](RESPONSIVE)
+![responsive](documentation/images/responsive.png)
 
 ## How to play
 
@@ -26,18 +26,21 @@ The winner is the player who can get four of their tokens in a row either horizo
 
 You can employ some strategic moves and think about how to best block your opponent.
 
-## Feature
+## Features
 
 ### Existing Features
 
 - Accepts user player name input
-![image](image)
+![welcome](documentation/images/welcome.png)
+
 - Continuous checking for winner
+![winner](documentation/images/winner.png)
+
 - Play against the computer
 - Input validations during game play
   - the user may not enter values over the game grid size
   - the user must enter an integer, no letters, or blank entry
-![image](image)
+![inputerrors](documentation/images/inputerrors.png)
 
 ### Future Features
 
@@ -70,11 +73,7 @@ After each player turn, this double array is checked for any possible game win.
 I have manually tested this project with the following tests:
 
 - Passed the code through a PEP8 linter - no issues found.
-![IMAGE](IMAGE)
-
 - Checked invalid user inputs are managed - the code can manage all expected incorrect input data.
-![IMAGE](IMAGE)
-
 - Checked the code is working in both local terminal and Heroku terminal.
 - Checked the latest branch is pushed and deployed live on Heroku.
 
@@ -100,6 +99,8 @@ I have manually tested this project with the following tests:
 - PEP8
   - No errors found from Flake8 vscode extension
   - No errors found from pep8ci.herokuapp.com
+
+  ![pep8](documentation/images/cilinter.png)
 
 ### Deployment
 

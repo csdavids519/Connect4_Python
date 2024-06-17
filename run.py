@@ -10,7 +10,8 @@ for i in range(columnx_size):
 input_column = 0
 player = "PC"
 print("**************************************************************")
-print("****                 WELCOME TO CONNECT 4                 ****")
+print("****                 WELCOME TO CONNECT 4x                ****")
+print("****                                                      ****")
 print("**** Pick a column number and try to get 4 'X's' in a row ****")
 print("**************************************************************")
 
@@ -30,7 +31,7 @@ def player_input():
     print("")
     print("")
     print("*******************************")
-    print(f"**** {player_name}'s turn! ****")
+    print(f"***    {player_name}'s turn!    ***")
     print("*******************************")
     while waiting_player_input:
         input_column = input("Enter a column number between 0 and 6: ")
@@ -70,7 +71,7 @@ def pc_player():
     print("")
     print("")
     print("*******************************")
-    print("**** PC player turn ****")
+    print("***     PC player turn      ***")
     print("*******************************")
 
     check_row = True
@@ -164,7 +165,7 @@ def check_winner():
         print("")
         print("*******************************")
         print("*******************************")
-        print(f"****     Winner: {player} !!  ****")
+        print(f"****   Winner: {player} !!  ****")
         print("*******************************")
         print("*******************************")
         print("")
