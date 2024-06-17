@@ -1,13 +1,12 @@
 # **Connect 4x**
 
 ---
-![welcome](documentation/images/welcome.png)
 
 'Connect 4x' is a Python game running deployed with Heroku using the Code Institute terminal template.
 
 Users can play against the computer and try to be the first to connect four of their game tokens in a row.
 
-The live version can be found here: [Connect 4X](https://connect4-2024-a3eeac48a194.herokuapp.com/)
+The live version can be found here: [Connect 4x](https://connect4-2024-a3eeac48a194.herokuapp.com/)
 
 ![responsive](documentation/images/responsive.png)
 
@@ -39,6 +38,9 @@ You can employ some strategic moves and think about how to best block your oppon
 ![winner](documentation/images/winner.png)
 
 - Play against the computer
+
+![game](documentation/images/game.png)
+
 - Input validations during game play
   - the user may not enter values over the game grid size
   - the user must enter an integer, no letters, or blank entry
@@ -110,11 +112,12 @@ I have manually tested this project with the following tests:
 This project was deployed using Code Institutes terminal template for Heroku.
 
 Steps to deploy:
-    - Fork or clone this repository
-    - Create a new Heroku app
-    - Select the correct buildpacks python and node.js in this order
-    - Link the Heroku app to the repository
-    - Click Deploy
+
+- Fork or clone this repository
+- Create a new Heroku app
+- Select the correct buildpacks python and node.js in this order
+- Link the Heroku app to the repository
+- Click Deploy
 
 ### Credits
 
