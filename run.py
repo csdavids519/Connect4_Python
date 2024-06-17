@@ -185,7 +185,7 @@ def change_player():
     elif player == "PC":
         player = player_name
         player_input()
+
+
 # Start game here with printing blank game grid
-
-
 update_grid()
