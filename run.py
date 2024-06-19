@@ -1,4 +1,6 @@
 import random
+from colorama import Fore, Back, Style
+from simple_term_menu import TerminalMenu
 
 columnx_size, rowy_size = 7, 7
 grid = [["[_]" for y in range(rowy_size)] for x in range(columnx_size)]
@@ -9,11 +11,8 @@ for i in range(columnx_size):
 
 input_column = 0
 player = "PC"
-print("**************************************************************")
-print("****                 WELCOME TO CONNECT 4x                ****")
-print("****                                                      ****")
-print("**** Pick a column number and try to get 4 'X's' in a row ****")
-print("**************************************************************")
+
+
 
 player_name = ""
 while player_name == "":
@@ -22,17 +21,11 @@ while player_name == "":
 
 
 def player_input():
-    """
-    Check payer input value is int and in rage of the game grid
-    """
+    """ Check payer input value is int and in rage of the game grid """
     global input_column
     global player_name
     waiting_player_input = True
-    print("")
-    print("")
-    print("*******************************")
-    print(f"***    {player_name}'s turn!    ***")
-    print("*******************************")
+    print_output('player')
     while waiting_player_input:
         input_column = input("Enter a column number between 0 and 6: ")
         try:
@@ -65,15 +58,8 @@ def check_place_position():
 
 
 def pc_player():
-    """
-    PC player easy setting picks column at random
-    """
-    print("")
-    print("")
-    print("*******************************")
-    print("***     PC player turn      ***")
-    print("*******************************")
-
+    """ PC player easy setting picks column at random """
+    print_output('PCplayer') 
     check_row = True
     pc_choice = random.randint(0, 6)
 
@@ -92,9 +78,7 @@ def pc_player():
 
 
 def update_grid():
-    """
-    draw grid array in a user readable format
-    """
+    """ draw grid array in a user readable format """
     for row in range(rowy_size):
         for col in range(columnx_size):
             print(grid[col][row], end=" ")
@@ -162,21 +146,13 @@ def check_winner():
                 except IndexError:
                     continue
     if winner_found:
-        print("")
-        print("*******************************")
-        print("*******************************")
-        print(f"****   Winner: {player} !!  ****")
-        print("*******************************")
-        print("*******************************")
-        print("")
+
         return
     change_player()
 
 
 def change_player():
-    """
-    Manage what player is next
-    """
+    """ Manage what player is next """
     global player
     global player_name
     if player == player_name:
@@ -187,5 +163,50 @@ def change_player():
         player_input()
 
 
+
+
+def print_output(x):
+    if x == 'welcome':
+        print(Fore.YELLOW + """
+**************************************************************
+****                 WELCOME TO CONNECT 4x                ****
+****                                                      ****
+**** Pick a column number and try to get 4 'X's' in a row ****
+**************************************************************
+""")
+    elif x == 'player':
+        print(Fore.RED + f"""
+*******************************
+***    {player_name}'s turn!    ***
+*******************************
+        """)
+
+    elif x == 'PCplayer':
+        print(Fore.BLUE + """
+*******************************
+***     PC player turn      ***
+*******************************
+              """)
+        
+    elif x == 'winner':
+        print(Fore.GREEN + f"""
+*******************************
+*******************************
+****   Winner: {player}   ****
+*******************************
+*******************************
+        """)
+
+    print(Style.RESET_ALL)
+
+
+
+
+
+
 # Start game here with printing blank game grid
+print_output('welcome')
 update_grid()
+
+
+
