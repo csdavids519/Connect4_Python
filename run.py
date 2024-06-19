@@ -18,9 +18,10 @@ while player_name == "":
     player_name = input("Enter your name: ")
 
 def player_input():
-    """ Check payer input value is int and in rage of the game grid """
+    """ Check payer input value is valid and, find the first empty row in chosen column"""
     waiting_player_input = True
     print_output('player')
+    # check input is valid
     while waiting_player_input:
         input_column = input("Enter a column number between 0 and 6: ")
         try:
@@ -28,16 +29,23 @@ def player_input():
         except ValueError:
             print("You must enter a number")
             continue
-
         if 0 <= int(input_column) <= 6:
             waiting_player_input = False
-            check_place_position()
         else:
             print("Enter a value between 0 and 6")
             continue
+    # Find first empty position in the column
+    for i in range(5, -1, -1):
+        if grid[int(input_column)][i] == "[_]":
+            grid[int(input_column)][i] = " X "
+            break  # only place one token
+        elif (i == 0) and grid[int(input_column)][i] != "[_]":
+            print("this column is full, pick another")
+            player_input()
+    return input_column
 
-
-def check_place_position():
+'''
+def check_place_position(input_column):
     """
     Check each row in the users selected column starting at the bottom,
     find the first empty position
@@ -50,7 +58,7 @@ def check_place_position():
             print("this column is full, pick another")
             player_input()
     update_grid()
-
+'''
 
 def pc_player():
     """ PC player easy setting picks column at random """
@@ -88,74 +96,49 @@ def check_winner():
     """
     tokens = [" O ", " X "]
     winner_found = False
-    # check horizontal
+
     for token in tokens:
         for y in range(rowy_size):
             for x in range(columnx_size):
                 try:
+                    # check horizontal
                     if (grid[x][y] == token and
                             grid[x+1][y] == token and
                             grid[x+2][y] == token and
                             grid[x+3][y] == token):
-                        winner_found = True
-                        break
-                except IndexError:
-                    continue
-    # check vertical
-    for token in tokens:
-        for y in range(rowy_size):
-            for x in range(columnx_size):
-                try:
+                                winner_found = True
+                                break
+                    # check vertical
                     if (grid[x][y] == token and
                             grid[x][y+1] == token and
                             grid[x][y+2] == token and
                             grid[x][y+3] == token):
-                        winner_found = True
-                        break
-                except IndexError:
-                    continue
-    # check diagonal top left to bottom right
-    for token in tokens:
-        for y in range(rowy_size):
-            for x in range(columnx_size):
-                try:
+                                winner_found = True
+                                break
+                    # check diagonal top left to bottom right
                     if (grid[x][y] == token and
                             grid[x+1][y-1] == token and
                             grid[x+2][y-2] == token and
                             grid[x+3][y-3] == token):
-                        winner_found = True
-                        break
-                except IndexError:
-                    continue
-    # check diagonal top right to bottom left
-    for token in tokens:
-        for y in range(rowy_size):
-            for x in range(columnx_size):
-                try:
+                                winner_found = True
+                                break
+                    # check diagonal top right to bottom left
                     if (grid[x][y] == token and
                             grid[x-1][y-1] == token and
                             grid[x-2][y-2] == token and
                             grid[x-3][y-3] == token):
-                        winner_found = True
-                        break
+                                winner_found = True
+                                break
                 except IndexError:
                     continue
-    if winner_found:
-        print_output('winner')
-        return
-    change_player()
+                if winner_found:
+                    print_output('winner')
+                    return
+        change_player()
 
+def change_player(x):
+    return 1 if x == 0 else 0
 
-def change_player():
-    """ Manage what player is next """
-    global current_player
-    if  current_player== player_name:
-        current_player = "PC"
-        pc_player()
-    elif current_player == "PC":
-        current_player = player_name
-
-        player_input()
 
 def print_output(x):
     if x == 'welcome':
@@ -194,7 +177,8 @@ def print_output(x):
 
 
 def main():
-    # Start game here with printing blank game grid
+    current_player
     print_output('welcome')
     update_grid()
+    player_input()
 main()
