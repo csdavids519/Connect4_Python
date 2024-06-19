@@ -9,21 +9,16 @@ grid = [["[_]" for y in range(rowy_size)] for x in range(columnx_size)]
 for i in range(columnx_size):
     grid[i][6] = f"[{i}]"
 
+current_player = 'PC'
 input_column = 0
-player = "PC"
-
-
-
 player_name = ""
+
 while player_name == "":
     # get players name
     player_name = input("Enter your name: ")
 
-
 def player_input():
     """ Check payer input value is int and in rage of the game grid """
-    global input_column
-    global player_name
     waiting_player_input = True
     print_output('player')
     while waiting_player_input:
@@ -146,28 +141,25 @@ def check_winner():
                 except IndexError:
                     continue
     if winner_found:
-
+        print_output('winner')
         return
     change_player()
 
 
 def change_player():
     """ Manage what player is next """
-    global player
-    global player_name
-    if player == player_name:
-        player = "PC"
+    global current_player
+    if  current_player== player_name:
+        current_player = "PC"
         pc_player()
-    elif player == "PC":
-        player = player_name
+    elif current_player == "PC":
+        current_player = player_name
+
         player_input()
-
-
-
 
 def print_output(x):
     if x == 'welcome':
-        print(Fore.YELLOW + """
+        print(Fore.MAGENTA + """
 **************************************************************
 ****                 WELCOME TO CONNECT 4x                ****
 ****                                                      ****
@@ -175,14 +167,14 @@ def print_output(x):
 **************************************************************
 """)
     elif x == 'player':
-        print(Fore.RED + f"""
+        print(Fore.BLUE + f"""
+              
 *******************************
 ***    {player_name}'s turn!    ***
-*******************************
-        """)
+*******************************""")
 
     elif x == 'PCplayer':
-        print(Fore.BLUE + """
+        print(Fore.YELLOW + """
 *******************************
 ***     PC player turn      ***
 *******************************
@@ -192,7 +184,7 @@ def print_output(x):
         print(Fore.GREEN + f"""
 *******************************
 *******************************
-****   Winner: {player}   ****
+****   Winner: {current_player}   ****
 *******************************
 *******************************
         """)
@@ -201,12 +193,8 @@ def print_output(x):
 
 
 
-
-
-
-# Start game here with printing blank game grid
-print_output('welcome')
-update_grid()
-
-
-
+def main():
+    # Start game here with printing blank game grid
+    print_output('welcome')
+    update_grid()
+main()
