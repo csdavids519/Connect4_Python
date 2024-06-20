@@ -1,6 +1,6 @@
 import random
 from colorama import Fore, Back, Style
-from simple_term_menu import TerminalMenu
+# from simple_term_menu import TerminalMenu
 
 columnx_size, rowy_size = 7, 7
 grid = [["[_]" for y in range(rowy_size)] for x in range(columnx_size)]
@@ -9,13 +9,17 @@ grid = [["[_]" for y in range(rowy_size)] for x in range(columnx_size)]
 for i in range(columnx_size):
     grid[i][6] = f"[{i}]"
 
-current_player = 'PC'
+current_player = 0
 input_column = 0
 player_name = ""
 
-while player_name == "":
-    # get players name
-    player_name = input("Enter your name: ")
+
+def get_player_name():
+    global player_name
+    while player_name == "":
+        # get players name
+        player_name = input("Enter your name: ")
+
 
 def player_input():
     """ Check payer input value is valid and, find the first empty row in chosen column"""
@@ -34,49 +38,40 @@ def player_input():
         else:
             print("Enter a value between 0 and 6")
             continue
-    # Find first empty position in the column
-    for i in range(5, -1, -1):
-        if grid[int(input_column)][i] == "[_]":
-            grid[int(input_column)][i] = " X "
-            break  # only place one token
-        elif (i == 0) and grid[int(input_column)][i] != "[_]":
-            print("this column is full, pick another")
-            player_input()
-    return input_column
+    check_column(input_column, 0)
 
-'''
-def check_place_position(input_column):
+
+def pc_player_input():
+    """ PC player easy setting picks column at random """
+    print_output('PCplayer') 
+    column = random.randint(0, 6)
+    check_column(column, 1)
+
+
+def check_column(column, player):
     """
     Check each row in the users selected column starting at the bottom,
     find the first empty position
     """
     for i in range(5, -1, -1):
-        if grid[int(input_column)][i] == "[_]":
-            grid[int(input_column)][i] = " X "
-            break  # only place one token
-        elif (i == 0) and grid[int(input_column)][i] != "[_]":
+        if (i == 0) and grid[int(column)][i] != "[_]":
             print("this column is full, pick another")
-            player_input()
-    update_grid()
-'''
+            if player == 0:
+                player_input()
+            else: 
+                pc_player_input()
+        else:
+             place_token(column, player)
 
-def pc_player():
-    """ PC player easy setting picks column at random """
-    print_output('PCplayer') 
-    check_row = True
-    pc_choice = random.randint(0, 6)
 
-    while check_row:
-        # check if the PC column choice is not full
-        for i in range(5, -1, -1):
-            if grid[pc_choice][i] == "[_]":
-                grid[pc_choice][i] = " O "
-                check_row = False
-                break  # only place one token
-            elif (i == 0) and grid[pc_choice][i] != "[_]":
-                pc_choice = random.randint(0, 6)
-                i = 0  # reset for loop
-                continue
+def place_token(column, player):
+    """ Find first empty position in the column """
+    token = ' X ' if player == 0 else ' O '
+
+    for i in range(5, -1, -1):
+        if grid[int(column)][i] == "[_]":
+            grid[int(column)][i] = token
+            break  # only place one token
     update_grid()
 
 
@@ -136,11 +131,19 @@ def check_winner():
                     return
         change_player()
 
-def change_player(x):
-    return 1 if x == 0 else 0
+def change_player():
+    global current_player
+    current_player = 1 if current_player == 0 else 0
+
+    if current_player == 0:
+        player_input()
+    else:
+        pc_player_input()
 
 
 def print_output(x):
+    global player_name
+
     if x == 'welcome':
         print(Fore.MAGENTA + """
 **************************************************************
@@ -176,9 +179,13 @@ def print_output(x):
 
 
 
+
+
 def main():
-    current_player
     print_output('welcome')
-    update_grid()
+    get_player_name()
+    
     player_input()
+
 main()
+
