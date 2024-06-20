@@ -15,14 +15,16 @@ player_name = ""
 
 
 def get_player_name():
+    print(Fore.RED + 'get_player_name')
     global player_name
     while player_name == "":
         # get players name
-        player_name = input("Enter your name: ")
+        player_name = 'dave' # input("Enter your name: ")
 
 
 def player_input():
     """ Check payer input value is valid and, find the first empty row in chosen column"""
+    print(Fore.RED + 'player_input')
     waiting_player_input = True
     print_output('player')
     # check input is valid
@@ -41,8 +43,10 @@ def player_input():
     check_column(input_column, 0)
 
 
+
 def pc_player_input():
     """ PC player easy setting picks column at random """
+    print(Fore.RED + 'pc_player_input')
     print_output('PCplayer') 
     column = random.randint(0, 6)
     check_column(column, 1)
@@ -53,6 +57,7 @@ def check_column(column, player):
     Check each row in the users selected column starting at the bottom,
     find the first empty position
     """
+    print(Fore.RED + 'check_column')
     for i in range(5, -1, -1):
         if (i == 0) and grid[int(column)][i] != "[_]":
             print("this column is full, pick another")
@@ -60,12 +65,12 @@ def check_column(column, player):
                 player_input()
             else: 
                 pc_player_input()
-        else:
-             place_token(column, player)
+    place_token(column, player)
 
 
 def place_token(column, player):
     """ Find first empty position in the column """
+    print(Fore.RED + 'place_token')
     token = ' X ' if player == 0 else ' O '
 
     for i in range(5, -1, -1):
@@ -77,6 +82,7 @@ def place_token(column, player):
 
 def update_grid():
     """ draw grid array in a user readable format """
+    print(Fore.RED + 'update_grid')
     for row in range(rowy_size):
         for col in range(columnx_size):
             print(grid[col][row], end=" ")
@@ -89,6 +95,7 @@ def check_winner():
     Check for a game win or change player
     * code reference modified from Shaun Halverson example see readme for link
     """
+    print(Fore.RED + 'check_winner')
     tokens = [" O ", " X "]
     winner_found = False
 
@@ -97,6 +104,7 @@ def check_winner():
             for x in range(columnx_size):
                 try:
                     # check horizontal
+                    # print(Fore.RED + f'horizontal {x},{y} ')
                     if (grid[x][y] == token and
                             grid[x+1][y] == token and
                             grid[x+2][y] == token and
@@ -104,6 +112,7 @@ def check_winner():
                                 winner_found = True
                                 break
                     # check vertical
+                    # print(Fore.RED + f'vertical {x},{y} ')
                     if (grid[x][y] == token and
                             grid[x][y+1] == token and
                             grid[x][y+2] == token and
@@ -111,6 +120,7 @@ def check_winner():
                                 winner_found = True
                                 break
                     # check diagonal top left to bottom right
+                    # print(Fore.RED + f'diagonal left {x},{y} ')
                     if (grid[x][y] == token and
                             grid[x+1][y-1] == token and
                             grid[x+2][y-2] == token and
@@ -118,6 +128,7 @@ def check_winner():
                                 winner_found = True
                                 break
                     # check diagonal top right to bottom left
+                    # print(Fore.RED + f'diagonal right {x},{y} ')
                     if (grid[x][y] == token and
                             grid[x-1][y-1] == token and
                             grid[x-2][y-2] == token and
@@ -129,7 +140,7 @@ def check_winner():
                 if winner_found:
                     print_output('winner')
                     return
-        change_player()
+    change_player()
 
 def change_player():
     global current_player
@@ -144,6 +155,7 @@ def change_player():
 def print_output(x):
     global player_name
 
+    print(Fore.RED + 'print_output')
     if x == 'welcome':
         print(Fore.MAGENTA + """
 **************************************************************
@@ -178,10 +190,8 @@ def print_output(x):
     print(Style.RESET_ALL)
 
 
-
-
-
 def main():
+    print(Fore.RED + 'MAIN')
     print_output('welcome')
     get_player_name()
     
