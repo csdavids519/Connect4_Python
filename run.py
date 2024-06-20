@@ -13,23 +13,22 @@ current_player = 0
 input_column = 0
 player_name = ""
 
+tokens = ['\033[44m' + ' X ' + '\033[49m', '\033[46m' + ' O ' + '\033[49m']
 
 def get_player_name():
-    print(Fore.RED + 'get_player_name')
     global player_name
     while player_name == "":
         # get players name
-        player_name = 'dave' # input("Enter your name: ")
+        player_name = input("Enter your name: ")
 
 
 def player_input():
     """ Check payer input value is valid and, find the first empty row in chosen column"""
-    print(Fore.RED + 'player_input')
     waiting_player_input = True
     print_player_turn()
     # check input is valid
     while waiting_player_input:
-        input_column = input("Enter a column number between 0 and 6: ")
+        input_column = input(Fore.YELLOW +"Enter a column number between 0 and 6: ")
         try:
             input_column = int(input_column)
         except ValueError:
@@ -45,7 +44,6 @@ def player_input():
 
 def pc_player_input():
     """ PC player easy setting picks column at random """
-    print(Fore.RED + 'pc_player_input')
     print_pc_turn() 
     # column = random.randint(0, 6)
     check_column(random.randint(0, 6), 1)
@@ -56,7 +54,6 @@ def check_column(column, player):
     Check each row in the users selected column starting at the bottom,
     find the first empty position
     """
-    print(Fore.RED + 'check_column')
     for i in range(5, -1, -1):
         if (i == 0) and grid[int(column)][i] != "[_]":
             print("this column is full, pick another")
@@ -69,9 +66,10 @@ def check_column(column, player):
 
 def place_token(column, player):
     """ Find first empty position in the column """
-    print(Fore.RED + 'place_token')
-    token = '\033[41m' + ' X ' if player == 0 else '\033[45m' + ' O '
+    # token = '\033[44m' + ' X ' + '\033[49m' if player == 0 else '\033[46m' + ' O ' + '\033[49m'
+    global tokens
 
+    token = tokens[0] if player == 0 else tokens[1]
     for i in range(5, -1, -1):
         if grid[int(column)][i] == "[_]":
             grid[int(column)][i] = token
@@ -81,7 +79,6 @@ def place_token(column, player):
 
 def update_grid():
     """ draw grid array in a user readable format """
-    print(Fore.RED + 'update_grid')
     print(Fore.RESET)
     for row in range(rowy_size):
         for col in range(columnx_size):
@@ -95,8 +92,8 @@ def check_winner():
     Check for a game win or change player
     * code reference modified from Shaun Halverson example see readme for link
     """
-    print(Fore.RED + 'check_winner')
-    tokens = [" O ", '\033[41m' + ' X ']
+    global tokens
+    # tokens = [" O ", '\033[44m' + ' X ']
     winner_found = False
 
     for token in tokens:
@@ -104,7 +101,6 @@ def check_winner():
             for x in range(columnx_size):
                 try:
                     # check horizontal
-                    # print(Fore.RED + f'horizontal {x},{y} ')
                     if (grid[x][y] == token and
                             grid[x+1][y] == token and
                             grid[x+2][y] == token and
@@ -112,7 +108,6 @@ def check_winner():
                                 winner_found = True
                                 break
                     # check vertical
-                    # print(Fore.RED + f'vertical {x},{y} ')
                     if (grid[x][y] == token and
                             grid[x][y+1] == token and
                             grid[x][y+2] == token and
@@ -120,7 +115,6 @@ def check_winner():
                                 winner_found = True
                                 break
                     # check diagonal top left to bottom right
-                    # print(Fore.RED + f'diagonal left {x},{y} ')
                     if (grid[x][y] == token and
                             grid[x+1][y-1] == token and
                             grid[x+2][y-2] == token and
@@ -128,7 +122,6 @@ def check_winner():
                                 winner_found = True
                                 break
                     # check diagonal top right to bottom left
-                    # print(Fore.RED + f'diagonal right {x},{y} ')
                     if (grid[x][y] == token and
                             grid[x-1][y-1] == token and
                             grid[x-2][y-2] == token and
@@ -175,24 +168,23 @@ def print_welcome():
 
 
 def print_player_turn():
-    print(Fore.BLUE + f"""
+    print(Fore.MAGENTA + f"""
               
+          
 *******************************
 ***    {player_name}'s turn!    ***
 *******************************""")
-    print(Fore.RESET)
 
 def print_pc_turn():
-    print(Fore.YELLOW + """
+    print(Fore.MAGENTA + """
+          
+
 *******************************
 ***     PC player turn      ***
-*******************************
-    """)
-    print(Fore.RESET)
+*******************************""")
         
 
 def main():
-    print(Fore.RED + 'MAIN')
     print_welcome()
     get_player_name()
     
