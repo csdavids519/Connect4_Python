@@ -121,29 +121,29 @@ def check_winner():
                             grid[x+1][y] == token and
                             grid[x+2][y] == token and
                             grid[x+3][y] == token):
-                                winner_found = True
-                                break
+                        winner_found = True
+                        break
                     # check vertical
                     if (grid[x][y] == token and
                             grid[x][y+1] == token and
                             grid[x][y+2] == token and
                             grid[x][y+3] == token):
-                                winner_found = True
-                                break
+                        winner_found = True
+                        break
                     # check diagonal top left to bottom right
                     if (grid[x][y] == token and
                             grid[x+1][y-1] == token and
                             grid[x+2][y-2] == token and
                             grid[x+3][y-3] == token):
-                                winner_found = True
-                                break
+                        winner_found = True
+                        break
                     # check diagonal top right to bottom left
                     if (grid[x][y] == token and
                             grid[x-1][y-1] == token and
                             grid[x-2][y-2] == token and
                             grid[x-3][y-3] == token):
-                                winner_found = True
-                                break
+                        winner_found = True
+                        break
                 except IndexError:
                     continue
                 if winner_found:
@@ -184,11 +184,11 @@ def print_welcome():
 ****                                                      ****
 **************************************************************
 
-    
+
     Pick a column number to insert your token at the top,
     it will fall to the next empty space.
-          
-    Try to get four X's in a row before the computer player!
+
+   Try to get four X's in a row before the computer player!
 """)
     print(Fore.RESET)
 
@@ -203,8 +203,8 @@ def print_welcome():
 def print_player_turn():
     """ Print game info for user """
     print(Fore.MAGENTA + f"""
-              
-          
+
+
 *******************************
 ***    {player_name}'s turn!    ***
 *******************************""")
@@ -213,7 +213,7 @@ def print_player_turn():
 def print_pc_turn():
     """ Print game info for user """
     print(Fore.MAGENTA + """
-          
+
 
 *******************************
 ***     PC player turn      ***
