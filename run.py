@@ -27,7 +27,7 @@ def set_game_grid():
 def get_player_name():
     """ Ask user for player name """
     global player_name
-    while player_name == "":
+    while True:
         # get players name
         player_name = input(Fore.YELLOW + "Enter your name: ")
         if len(player_name) < 3:
@@ -236,7 +236,8 @@ def main():
     """ Call functions to run game play"""
     set_game_grid()
     print_welcome()
-    get_player_name()
+    while player_name == "":
+        get_player_name()
 
     player_input()
 
