@@ -53,6 +53,7 @@ You can employ some strategic moves and think about how to best block your oppon
     possible to have the difficulty increase to the impossible level where the computer player would always win.
 - Allow for multiplayer, the PC player would turn off and allow two people to play each other.
 - Allow for token character selection, the player could pick what their token looks like rather than the standard 'X'.
+- currently the code of Connect 4x is not optimized for performance, for example, the list comprehension used to create the game board could be split to for loops to improve performance. Because Connect 4x is only a small program the decision to use list comprehension was made.
 
 ## Data Model
 
@@ -66,8 +67,19 @@ After each player turn, this double array is checked for any possible game win.
 
 ## Technologies Used
 
+### Languages
+
 - [Python](https://www.python.org/) - was used to create Connect 4x.
+
+### Frameworks, libraries, and packages
+
+- [Colorama](https://pypi.org/project/colorama/) - was used to produce colored text and background color on the game grid.
+-[Simple Term Menu](https://pypi.org/project/simple-term-menu/) - was used to created the game restart or quit menu.
+
+### Tools
+
 - [VSCode](https://code.visualstudio.com/) was used as the code editor.
+- [Heroku](https://www.heroku.com/home) - was used to deploy the project.
 - [GitHub](https://github.com/) was used to host the code of the website.
 - [Am I responsive](https://ui.dev/amiresponsive) was used to generate an image of the site on different screen sizes.
 - [CI Python Linter](https://pep8ci.herokuapp.com/) was used to validate the python formatting.
@@ -77,10 +89,18 @@ After each player turn, this double array is checked for any possible game win.
 
 I have manually tested this project with the following tests:
 
-- Passed the code through a PEP8 linter - no issues found.
-- Checked invalid user inputs are managed - the code can manage all expected incorrect input data.
-- Checked the code is working in both local terminal and Heroku terminal.
-- Checked the latest branch is pushed and deployed live on Heroku.
+|               Tests               | Passed |                                              Comments                                              |
+|:---------------------------------:|:------:|:--------------------------------------------------------------------------------------------------:|
+| PEP8 Linters                      |    X   | Passed through both Flake8 and CI Linter without issues                                            |
+| Check user inputs validation      |    X   | Input values for user name and column selection respond to invalid data and display error messages |
+| Check code runs in local terminal |    X   | Connect 4x runs in the local Python3 terminal with requirements loaded                             |
+| Check code runs in Heroku         |    X   | Connect 4x runs as expected when deployed to Heroku                                                |
+| Restart is possible               |    X   | Connect 4x restarts with a clean game board after user selects retry option                        |
+
+### Flow Chart
+
+See flow chart of Connect 4x functions:
+[FlowChart](documentation/flow_chart.pdf)
 
 ### Bugs
 
@@ -103,7 +123,7 @@ I have manually tested this project with the following tests:
 
 - PEP8
   - No errors found from Flake8 vscode extension
-  - No errors found from pep8ci.herokuapp.com
+  - No errors found from pep8ci.com
 
   ![pep8](documentation/images/cilinter.png)
 
@@ -125,3 +145,5 @@ Steps to deploy:
 - [w3schools](https://www.w3schools.com/python/default.asp) for helping to solve my issue when printing the game grid
 - [Shaun Halverson](https://youtu.be/i_4ZWjmybWs?si=6AXq3a2puR_vBvCJ) Although the code needed to be modified for this connect 4 project,
     Shaun Halverson is credited for the method of checking for the game winners.
+- [Heroku](https://www.heroku.com/home) - for deploying the project on a student account.
+
