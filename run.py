@@ -12,32 +12,35 @@ for i in range(columnx_size):
 current_player = 0
 input_column = 0
 player_name = ""
-
 tokens = ['\033[44m' + ' X ' + '\033[49m', '\033[46m' + ' O ' + '\033[49m']
+
 
 def get_player_name():
     global player_name
-    while player_name == "":
+    while True:
         # get players name
-        player_name = input("Enter your name: ")
+        player_name = input(Fore.YELLOW +"Enter your name: ")
+        if len(player_name) < 3:
+             print(Fore.RED + 'Name must be at least 3 characters long') 
+        else:
+            break
 
 
 def player_input():
     """ Check payer input value is valid and, find the first empty row in chosen column"""
-    waiting_player_input = True
     print_player_turn()
     # check input is valid
-    while waiting_player_input:
+    while True:
         input_column = input(Fore.YELLOW +"Enter a column number between 0 and 6: ")
         try:
             input_column = int(input_column)
         except ValueError:
-            print("You must enter a number")
+            print(Fore.RED +"You must enter a real number, without decimal points or letters")
             continue
         if 0 <= int(input_column) <= 6:
-            waiting_player_input = False
+            break
         else:
-            print("Enter a value between 0 and 6")
+            print(Fore.RED +"Enter a value between 0 and 6")
             continue
     check_column(input_column, 0)
 
@@ -45,7 +48,6 @@ def player_input():
 def pc_player_input():
     """ PC player easy setting picks column at random """
     print_pc_turn() 
-    # column = random.randint(0, 6)
     check_column(random.randint(0, 6), 1)
 
 
@@ -161,10 +163,23 @@ def print_welcome():
 **************************************************************
 ****                 WELCOME TO CONNECT 4x                ****
 ****                                                      ****
-**** Pick a column number and try to get 4 'X's' in a row ****
+****                                                      ****
 **************************************************************
+
+    
+    Pick a column number to insert your token at the top,
+    it will fall to the next empty space.
+          
+    Try to get four X's in a row before the computer player!
 """)
     print(Fore.RESET)
+
+    for row in range(rowy_size):
+        for col in range(columnx_size):
+            print(Back.RESET + grid[col][row], end=" ")
+
+        print(Back.RESET )
+    print("")
 
 
 def print_player_turn():
