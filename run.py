@@ -8,6 +8,8 @@ grid = [["[_]" for y in range(rowy_size)] for x in range(columnx_size)]
 current_player = 0
 input_column = 0
 player_name = ""
+
+# use colorama ansi codes for token backgrounds
 tokens = ['\033[44m' + ' X ' + '\033[49m', '\033[46m' + ' O ' + '\033[49m']
 
 
@@ -27,35 +29,41 @@ def get_player_name():
     global player_name
     while player_name == "":
         # get players name
-        player_name = input(Fore.YELLOW +"Enter your name: ")
+        player_name = input(Fore.YELLOW + "Enter your name: ")
         if len(player_name) < 3:
-             print(Fore.RED + 'Name must be at least 3 characters long') 
+            print(Fore.RED + 'Name must be at least 3 characters long')
         else:
             break
 
 
 def player_input():
-    """ Check payer input value is valid and, find the first empty row in chosen column"""
+    """
+    Check payer input value is valid and,
+    find the first empty row in chosen column
+    """
     print_player_turn()
     # check input is valid
     while True:
-        input_column = input(Fore.YELLOW +"Enter a column number between 0 and 6: ")
+        input_column = input(Fore.YELLOW +
+                             "Enter a column number between 0 and 6: ")
         try:
             input_column = int(input_column)
         except ValueError:
-            print(Fore.RED +"You must enter a real number, without decimal points or letters")
+            print(Fore.RED +
+                  "You must enter a real number, "
+                  "without decimal points or letters")
             continue
         if 0 <= int(input_column) <= 6:
             break
         else:
-            print(Fore.RED +"Enter a value between 0 and 6")
+            print(Fore.RED + "Enter a value between 0 and 6")
             continue
     check_column(input_column, 0)
 
 
 def pc_player_input():
     """ PC player easy setting picks column at random """
-    print_pc_turn() 
+    print_pc_turn()
     check_column(random.randint(0, 6), 1)
 
 
@@ -69,14 +77,13 @@ def check_column(column, player):
             print("this column is full, pick another")
             if player == 0:
                 player_input()
-            else: 
+            else:
                 pc_player_input()
     place_token(column, player)
 
 
 def place_token(column, player):
     """ Find first empty position in the column """
-    # token = '\033[44m' + ' X ' + '\033[49m' if player == 0 else '\033[46m' + ' O ' + '\033[49m'
     global tokens
 
     token = tokens[0] if player == 0 else tokens[1]
@@ -93,7 +100,7 @@ def update_grid():
     for row in range(rowy_size):
         for col in range(columnx_size):
             print(Back.RESET + grid[col][row], end=" ")
-        print(Back.RESET )
+        print(Back.RESET)
     check_winner()
 
 
@@ -144,6 +151,7 @@ def check_winner():
                     return
     change_player()
 
+
 def change_player():
     """ Change the player and call the input function"""
     global current_player
@@ -188,7 +196,7 @@ def print_welcome():
         for col in range(columnx_size):
             print(Back.RESET + grid[col][row], end=" ")
 
-        print(Back.RESET )
+        print(Back.RESET)
     print("")
 
 
@@ -201,6 +209,7 @@ def print_player_turn():
 ***    {player_name}'s turn!    ***
 *******************************""")
 
+
 def print_pc_turn():
     """ Print game info for user """
     print(Fore.MAGENTA + """
@@ -209,17 +218,18 @@ def print_pc_turn():
 *******************************
 ***     PC player turn      ***
 *******************************""")
-        
+
+
 def menu():
-     """ Display end game menu for restart or quit options """
-     options = ['Retry', 'Quit']
-     end_menu = TerminalMenu(options)
-     end_menu_index = end_menu.show()
-     if options[end_menu_index] == 'Retry':
+    """ Display end game menu for restart or quit options """
+    options = ['Retry', 'Quit']
+    end_menu = TerminalMenu(options)
+    end_menu_index = end_menu.show()
+    if options[end_menu_index] == 'Retry':
         print('retry')
         main()
-     else:
-          print('Good Bye!')
+    else:
+        print('Good Bye!')
 
 
 def main():
@@ -227,9 +237,10 @@ def main():
     set_game_grid()
     print_welcome()
     get_player_name()
-    
+
     player_input()
 
     menu()
-main()
 
+
+main()
