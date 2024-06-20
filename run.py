@@ -74,7 +74,7 @@ def check_column(column, player):
     """
     for i in range(5, -1, -1):
         if (i == 0) and grid[int(column)][i] != "[_]":
-            print("this column is full, pick another")
+            print(Fore.RED + "this column is full, pick another")
             if player == 0:
                 player_input()
             else:
@@ -147,7 +147,10 @@ def check_winner():
                 except IndexError:
                     continue
                 if winner_found:
-                    print_winner(token)
+                    if token == tokens[0]:
+                        print_winner(player_name)
+                    else:
+                        print_winner(token)
                     return
     change_player()
 
@@ -177,7 +180,7 @@ def print_winner(winner):
 
 def print_welcome():
     """ Print game info for user """
-    print(Fore.MAGENTA + """
+    print(Fore.CYAN + """
 **************************************************************
 ****                 WELCOME TO CONNECT 4x                ****
 ****                                                      ****
@@ -202,7 +205,7 @@ def print_welcome():
 
 def print_player_turn():
     """ Print game info for user """
-    print(Fore.MAGENTA + f"""
+    print(Fore.CYAN + f"""
 
 
 *******************************
@@ -212,7 +215,7 @@ def print_player_turn():
 
 def print_pc_turn():
     """ Print game info for user """
-    print(Fore.MAGENTA + """
+    print(Fore.CYAN + """
 
 
 *******************************
@@ -229,7 +232,7 @@ def menu():
         print('retry')
         main()
     else:
-        print('Good Bye!')
+        print('Good-bye!')
 
 
 def main():
