@@ -1,5 +1,5 @@
 import random
-from colorama import Fore, Back, Style
+from colorama import Fore, Back
 # from simple_term_menu import TerminalMenu
 
 columnx_size, rowy_size = 7, 7
@@ -70,7 +70,7 @@ def check_column(column, player):
 def place_token(column, player):
     """ Find first empty position in the column """
     print(Fore.RED + 'place_token')
-    token = ' X ' if player == 0 else ' O '
+    token = '\033[41m' + ' X ' if player == 0 else '\033[45m' + ' O '
 
     for i in range(5, -1, -1):
         if grid[int(column)][i] == "[_]":
@@ -82,10 +82,11 @@ def place_token(column, player):
 def update_grid():
     """ draw grid array in a user readable format """
     print(Fore.RED + 'update_grid')
+    print(Fore.RESET)
     for row in range(rowy_size):
         for col in range(columnx_size):
-            print(grid[col][row], end=" ")
-        print("")
+            print(Back.RESET + grid[col][row], end=" ")
+        print(Back.RESET )
     check_winner()
 
 
@@ -95,7 +96,7 @@ def check_winner():
     * code reference modified from Shaun Halverson example see readme for link
     """
     print(Fore.RED + 'check_winner')
-    tokens = [" O ", " X "]
+    tokens = [" O ", '\033[41m' + ' X ']
     winner_found = False
 
     for token in tokens:
@@ -155,7 +156,7 @@ def print_winner(winner):
     print(Fore.GREEN + f"""
 *******************************
 *******************************
-****   Winner: {winner}   ****
+****   Winner: {winner} \033[49m   ****
 *******************************
 *******************************
         """)
