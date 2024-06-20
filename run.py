@@ -1,13 +1,9 @@
 import random
 from colorama import Fore, Back
-# from simple_term_menu import TerminalMenu
+from simple_term_menu import TerminalMenu
 
 columnx_size, rowy_size = 7, 7
 grid = [["[_]" for y in range(rowy_size)] for x in range(columnx_size)]
-
-# add row with column identifers
-for i in range(columnx_size):
-    grid[i][6] = f"[{i}]"
 
 current_player = 0
 input_column = 0
@@ -15,9 +11,21 @@ player_name = ""
 tokens = ['\033[44m' + ' X ' + '\033[49m', '\033[46m' + ' O ' + '\033[49m']
 
 
+def set_game_grid():
+    """ Set the game grid to blank with column numbers for game start"""
+    for row in range(rowy_size):
+        for col in range(columnx_size):
+            grid[col][row] = "[_]"
+
+    # add row with column identifers
+    for i in range(columnx_size):
+        grid[i][6] = f"[{i}]"
+
+
 def get_player_name():
+    """ Ask user for player name """
     global player_name
-    while True:
+    while player_name == "":
         # get players name
         player_name = input(Fore.YELLOW +"Enter your name: ")
         if len(player_name) < 3:
@@ -95,7 +103,6 @@ def check_winner():
     * code reference modified from Shaun Halverson example see readme for link
     """
     global tokens
-    # tokens = [" O ", '\033[44m' + ' X ']
     winner_found = False
 
     for token in tokens:
@@ -138,6 +145,7 @@ def check_winner():
     change_player()
 
 def change_player():
+    """ Change the player and call the input function"""
     global current_player
     current_player = 1 if current_player == 0 else 0
 
@@ -148,6 +156,7 @@ def change_player():
 
 
 def print_winner(winner):
+    """ Print game info for user """
     print(Fore.GREEN + f"""
 *******************************
 *******************************
@@ -159,6 +168,7 @@ def print_winner(winner):
 
 
 def print_welcome():
+    """ Print game info for user """
     print(Fore.MAGENTA + """
 **************************************************************
 ****                 WELCOME TO CONNECT 4x                ****
@@ -183,6 +193,7 @@ def print_welcome():
 
 
 def print_player_turn():
+    """ Print game info for user """
     print(Fore.MAGENTA + f"""
               
           
@@ -191,6 +202,7 @@ def print_player_turn():
 *******************************""")
 
 def print_pc_turn():
+    """ Print game info for user """
     print(Fore.MAGENTA + """
           
 
@@ -198,12 +210,26 @@ def print_pc_turn():
 ***     PC player turn      ***
 *******************************""")
         
+def menu():
+     """ Display end game menu for restart or quit options """
+     options = ['Retry', 'Quit']
+     end_menu = TerminalMenu(options)
+     end_menu_index = end_menu.show()
+     if options[end_menu_index] == 'Retry':
+        print('retry')
+        main()
+     else:
+          print('Good Bye!')
+
 
 def main():
+    """ Call functions to run game play"""
+    set_game_grid()
     print_welcome()
     get_player_name()
     
     player_input()
 
+    menu()
 main()
 
