@@ -26,7 +26,7 @@ def player_input():
     """ Check payer input value is valid and, find the first empty row in chosen column"""
     print(Fore.RED + 'player_input')
     waiting_player_input = True
-    print_output('player')
+    print_player_turn()
     # check input is valid
     while waiting_player_input:
         input_column = input("Enter a column number between 0 and 6: ")
@@ -43,13 +43,12 @@ def player_input():
     check_column(input_column, 0)
 
 
-
 def pc_player_input():
     """ PC player easy setting picks column at random """
     print(Fore.RED + 'pc_player_input')
-    print_output('PCplayer') 
-    column = random.randint(0, 6)
-    check_column(column, 1)
+    print_pc_turn() 
+    # column = random.randint(0, 6)
+    check_column(random.randint(0, 6), 1)
 
 
 def check_column(column, player):
@@ -138,7 +137,7 @@ def check_winner():
                 except IndexError:
                     continue
                 if winner_found:
-                    print_output('winner')
+                    print_winner(token)
                     return
     change_player()
 
@@ -152,47 +151,48 @@ def change_player():
         pc_player_input()
 
 
-def print_output(x):
-    global player_name
+def print_winner(winner):
+    print(Fore.GREEN + f"""
+*******************************
+*******************************
+****   Winner: {winner}   ****
+*******************************
+*******************************
+        """)
+    print(Fore.RESET)
 
-    print(Fore.RED + 'print_output')
-    if x == 'welcome':
-        print(Fore.MAGENTA + """
+
+def print_welcome():
+    print(Fore.MAGENTA + """
 **************************************************************
 ****                 WELCOME TO CONNECT 4x                ****
 ****                                                      ****
 **** Pick a column number and try to get 4 'X's' in a row ****
 **************************************************************
 """)
-    elif x == 'player':
-        print(Fore.BLUE + f"""
+    print(Fore.RESET)
+
+
+def print_player_turn():
+    print(Fore.BLUE + f"""
               
 *******************************
 ***    {player_name}'s turn!    ***
 *******************************""")
+    print(Fore.RESET)
 
-    elif x == 'PCplayer':
-        print(Fore.YELLOW + """
+def print_pc_turn():
+    print(Fore.YELLOW + """
 *******************************
 ***     PC player turn      ***
 *******************************
-              """)
+    """)
+    print(Fore.RESET)
         
-    elif x == 'winner':
-        print(Fore.GREEN + f"""
-*******************************
-*******************************
-****   Winner: {current_player}   ****
-*******************************
-*******************************
-        """)
-
-    print(Style.RESET_ALL)
-
 
 def main():
     print(Fore.RED + 'MAIN')
-    print_output('welcome')
+    print_welcome()
     get_player_name()
     
     player_input()
