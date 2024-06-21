@@ -124,6 +124,7 @@ def check_winner():
                         winner_found = True
                         break
                     # check vertical
+                    print(f'x:{x}, y:{y} token: {token} found: {grid[x][y]}')
                     if (grid[x][y] == token and
                             grid[x][y+1] == token and
                             grid[x][y+2] == token and
@@ -229,7 +230,6 @@ def menu():
     end_menu = TerminalMenu(options)
     end_menu_index = end_menu.show()
     if options[end_menu_index] == 'Retry':
-        print('retry')
         main()
     else:
         print('Good-bye!')
