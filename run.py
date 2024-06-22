@@ -29,7 +29,9 @@ def get_player_name():
     global player_name
     while True:
         # get players name
-        player_name = input(Fore.YELLOW + "Enter your name: ")
+        print(Fore.YELLOW + 'Enter a name, must be three characters long, ' +
+              "any character you'd like.")
+        player_name = input(Fore.YELLOW + "Choose your name: ")
         if len(player_name) < 3:
             print(Fore.RED + 'Name must be at least 3 characters long')
         else:
@@ -176,7 +178,7 @@ def print_winner(token):
     """ Print game info for user """
     global player_name
     if token == tokens[0]:
-        winner_text = 'Winner: ' + player_name
+        winner_text = 'Winner: ' + player_name + ' !'
     else:
         winner_text = 'Sorry, you lost'
 
