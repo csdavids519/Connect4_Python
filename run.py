@@ -115,56 +115,48 @@ def check_winner():
     for token in tokens:
         for y in range(rowy_size):
             for x in range(columnx_size):
-                print(f'x:{x}, y:{y} token: {token} found: {grid[x][y]}')
                 try:
+                    # check horizontal
                     if (grid[x][y] == token and
                             grid[x+1][y] == token and
                             grid[x+2][y] == token and
                             grid[x+3][y] == token):
                         winner_found = True
-                        # break
+                        break
                 except IndexError:
-                    print(f'INDEX ERROR HORIZ x:{x}, y:{y} {token}')
-                    # check diagonal top left to bottom right
-                    # print('check diag top left')
+                    continue
                 try:
                     # check vertical
-                    # print('check vert')
                     if (grid[x][y] == token and
                             grid[x][y+1] == token and
                             grid[x][y+2] == token and
                             grid[x][y+3] == token):
                         winner_found = True
-                    # break
+                        break
                 except IndexError:
-                    print(f'INDEX ERROR VERT x:{x}, y:{y} {token}')
-                    # check horizontal
-                    # print('check horizontal')
+                    continue
+                # check diagonal top left to bottom right
                 try:
                     if (grid[x][y] == token and
                             grid[x+1][y-1] == token and
                             grid[x+2][y-2] == token and
                             grid[x+3][y-3] == token):
                         winner_found = True
-                        # break
+                        break
                 except IndexError:
-                    print(f'INDEX ERROR DIAG TOP LEFT x:{x}, y:{y} {token}')
+                    continue
                     # check diagonal top right to bottom left
-                    # print('check diag top right')
                 try:
                     if (grid[x][y] == token and
                             grid[x-1][y-1] == token and
                             grid[x-2][y-2] == token and
                             grid[x-3][y-3] == token):
                         winner_found = True
-                        # break
+                        break
                 except IndexError:
-                    print(f'INDEX ERROR TOP RIGHTx:{x}, y:{y} {token}')
+                    continue
                 if winner_found:
-                    if token == tokens[0]:
-                        print_winner(player_name)
-                    else:
-                        print_winner(token)
+                    print_winner(token)
                     return
     change_player()
 
@@ -180,12 +172,18 @@ def change_player():
         pc_player_input()
 
 
-def print_winner(winner):
+def print_winner(token):
     """ Print game info for user """
+    global player_name
+    if token == tokens[0]:
+        winner_text = 'Winner: ' + player_name
+    else:
+        winner_text = 'Sorry, you lost'
+
     print(Fore.GREEN + f"""
     *******************************
     *******************************
-    ****   Winner: {winner} \033[49m   ****
+            {winner_text}
     *******************************
     *******************************
         """)
