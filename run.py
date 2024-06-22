@@ -115,38 +115,51 @@ def check_winner():
     for token in tokens:
         for y in range(rowy_size):
             for x in range(columnx_size):
+                print(f'x:{x}, y:{y} token: {token} found: {grid[x][y]}')
                 try:
-                    # check horizontal
                     if (grid[x][y] == token and
                             grid[x+1][y] == token and
                             grid[x+2][y] == token and
                             grid[x+3][y] == token):
                         winner_found = True
-                        break
+                        # break
+                except IndexError:
+                    print(f'INDEX ERROR HORIZ x:{x}, y:{y} {token}')
+                    # check diagonal top left to bottom right
+                    # print('check diag top left')
+                try:
                     # check vertical
-                    print(f'x:{x}, y:{y} token: {token} found: {grid[x][y]}')
+                    # print('check vert')
                     if (grid[x][y] == token and
                             grid[x][y+1] == token and
                             grid[x][y+2] == token and
                             grid[x][y+3] == token):
                         winner_found = True
-                        break
-                    # check diagonal top left to bottom right
+                    # break
+                except IndexError:
+                    print(f'INDEX ERROR VERT x:{x}, y:{y} {token}')
+                    # check horizontal
+                    # print('check horizontal')
+                try:
                     if (grid[x][y] == token and
                             grid[x+1][y-1] == token and
                             grid[x+2][y-2] == token and
                             grid[x+3][y-3] == token):
                         winner_found = True
-                        break
+                        # break
+                except IndexError:
+                    print(f'INDEX ERROR DIAG TOP LEFT x:{x}, y:{y} {token}')
                     # check diagonal top right to bottom left
+                    # print('check diag top right')
+                try:
                     if (grid[x][y] == token and
                             grid[x-1][y-1] == token and
                             grid[x-2][y-2] == token and
                             grid[x-3][y-3] == token):
                         winner_found = True
-                        break
+                        # break
                 except IndexError:
-                    continue
+                    print(f'INDEX ERROR TOP RIGHTx:{x}, y:{y} {token}')
                 if winner_found:
                     if token == tokens[0]:
                         print_winner(player_name)
@@ -170,11 +183,11 @@ def change_player():
 def print_winner(winner):
     """ Print game info for user """
     print(Fore.GREEN + f"""
-*******************************
-*******************************
-****   Winner: {winner} \033[49m   ****
-*******************************
-*******************************
+    *******************************
+    *******************************
+    ****   Winner: {winner} \033[49m   ****
+    *******************************
+    *******************************
         """)
     print(Fore.RESET)
 
@@ -182,11 +195,11 @@ def print_winner(winner):
 def print_welcome():
     """ Print game info for user """
     print(Fore.CYAN + """
-**************************************************************
-****                 WELCOME TO CONNECT 4x                ****
-****                                                      ****
-****                                                      ****
-**************************************************************
+    **************************************************************
+    ****                 WELCOME TO CONNECT 4x                ****
+    ****                                                      ****
+    ****                                                      ****
+    **************************************************************
 
 
     Pick a column number to insert your token at the top,
@@ -209,9 +222,9 @@ def print_player_turn():
     print(Fore.CYAN + f"""
 
 
-*******************************
-***    {player_name}'s turn!    ***
-*******************************""")
+    *******************************
+    ***    {player_name}'s turn!    ***
+    *******************************""")
 
 
 def print_pc_turn():
@@ -219,9 +232,9 @@ def print_pc_turn():
     print(Fore.CYAN + """
 
 
-*******************************
-***     PC player turn      ***
-*******************************""")
+    *******************************
+    ***     PC player turn      ***
+    *******************************""")
 
 
 def menu():
