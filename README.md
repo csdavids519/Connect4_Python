@@ -49,11 +49,10 @@ You can employ some strategic moves and think about how to best block your oppon
 
 ### Future Features
 
-- Allow for difficulty level selection, Connect 4 is a 'solved' game this means its
-    possible to have the difficulty increase to the impossible level where the computer player would always win.
+- Allow for difficulty level selection, Connect 4 is a 'solved' game this means its possible to have the difficulty increase to the impossible level where the computer player would always win. Currently the game is very easy because the pc player only picks a column at random and has no strategy.
 - Allow for multiplayer, the PC player would turn off and allow two people to play each other.
 - Allow for token character selection, the player could pick what their token looks like rather than the standard 'X'.
-- currently the code of Connect 4x is not optimized for performance, for example, the list comprehension used to create the game board could be split to for loops to improve performance. Because Connect 4x is only a small program the decision to use list comprehension was made.
+- Currently the code of Connect 4x is not optimized for performance, for example, the list comprehension used to create the game board could be split to for loops to improve performance. Because Connect 4x is only a small program the decision to use list comprehension was made.
 
 ## Data Model
 
@@ -74,7 +73,7 @@ After each player turn, this double array is checked for any possible game win.
 ### Frameworks, libraries, and packages
 
 - [Colorama](https://pypi.org/project/colorama/) - was used to produce colored text and background color on the game grid.
--[Simple Term Menu](https://pypi.org/project/simple-term-menu/) - was used to created the game restart or quit menu.
+- [Simple Term Menu](https://pypi.org/project/simple-term-menu/) - was used to created the game restart or quit menu.
 
 ### Tools
 
@@ -107,13 +106,15 @@ See flow chart of Connect 4x functions:
 #### Solved Bugs
 
 - During the creation of the game board many issues arose such as getting the grid printing in the correct X,Y format.
-    As well getting the grid to print the columns vertically.
-    This was solved after learning about 'end=" "' property in the print function.
+As well getting the grid to print the columns vertically.
+This was solved after learning about 'end=" "' property in the print function.
 
 - During deployment to Heroku the first attempt failed due to items on the requirements.txt file that where not necessary.
-    After some checking, it was clear the 'pip freeze' command listed all installed python packages, from my PC, none of these where
-    actually requirements for my project. I installed 'pipx pipreqs' to check the actual requirements for this project.
-    There are no required packages needed to run Connect 4x that do not come included in Python3.
+After some checking, it was clear the 'pip freeze' command listed all installed python packages, from my PC, none of these where
+actually requirements for my project. I installed 'pipx pipreqs' to check the actual requirements for this project.
+There are no required packages needed to run Connect 4x that do not come included in Python3.
+
+- After reducing duplicate code in the 'check winner' function, there was an issue where it was not possible to win the game when four tokens where placed in column six. This error ocurred because of the Index Error check, when the first index error was found the code for checking vertical winning was skipped. This issue was solved by adding a 'try' for each win direction check. The Index Error is expected and ignored because as the check gets near the edge of the grid boarders it continues to check passed the grid limits, this error is ignored because it is not possible to win in this scenario and does not affect game play.
 
 #### Open Bugs
 
@@ -131,13 +132,21 @@ See flow chart of Connect 4x functions:
 
 This project was deployed using Code Institutes terminal template for Heroku.
 
-Steps to deploy:
+Steps to deploy on Heroku:
 
-- Fork or clone this repository
-- Create a new Heroku app
-- Select the correct buildpacks python and node.js in this order
-- Link the Heroku app to the repository
-- Click Deploy
+1. Create a Heroku account
+2. View the settings of the project via the settings tab
+3. Check Config Vars add:
+    key: Port Value: 8000
+![deployheroku3](documentation/images/deployheroku_3.png)
+4. Check Buildpacks include the following in the correct order:
+    1. heroku/python
+    2. herku/nodejs
+![deployheroku4](documentation/images/deployheroku_4.png)
+5. On Deploy tab choose Deployment method GitHub and connect your GitHub account.
+![deployheroku5](documentation/images/deployheroku_5.png)
+6. In the manual deploy section select the correct branch and deploy your project.
+![deployheroku6](documentation/images/deployheroku_6.png)
 
 ### Credits
 
@@ -146,4 +155,5 @@ Steps to deploy:
 - [Shaun Halverson](https://youtu.be/i_4ZWjmybWs?si=6AXq3a2puR_vBvCJ) Although the code needed to be modified for this connect 4 project,
     Shaun Halverson is credited for the method of checking for the game winners.
 - [Heroku](https://www.heroku.com/home) - for deploying the project on a student account.
-
+- [Colorama](https://pypi.org/project/colorama/) - was used to produce colored text and background color on the game grid.
+- [Simple Term Menu](https://pypi.org/project/simple-term-menu/) - was used to created the game restart or quit menu.
