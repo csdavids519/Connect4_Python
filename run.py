@@ -2,6 +2,7 @@ import random
 from colorama import Fore, Back
 from simple_term_menu import TerminalMenu
 
+
 columnx_size, rowy_size = 7, 7
 grid = [["[_]" for y in range(rowy_size)] for x in range(columnx_size)]
 
