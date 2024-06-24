@@ -114,7 +114,6 @@ def check_winner():
     * code reference modified from Shaun Halverson example see readme for link
     """
     global tokens
-    winner_found = False
 
     for token in tokens:
         for y in range(rowy_size):
@@ -125,43 +124,44 @@ def check_winner():
                             grid[x+1][y] == token and
                             grid[x+2][y] == token and
                             grid[x+3][y] == token):
-                        winner_found = True
-                        break
+                        print_winner(token,
+                                     f'Win found at column:{x} horizontal')
+                        return
                 except IndexError:
-                    continue
+                    pass
                 try:
                     # check vertical
                     if (grid[x][y] == token and
                             grid[x][y+1] == token and
                             grid[x][y+2] == token and
                             grid[x][y+3] == token):
-                        winner_found = True
-                        break
+                        print_winner(token,
+                                     f'Win found at column:{x} vertical')
+                        return
                 except IndexError:
-                    continue
+                    pass
                 # check diagonal top left to bottom right
                 try:
                     if (grid[x][y] == token and
                             grid[x+1][y-1] == token and
                             grid[x+2][y-2] == token and
                             grid[x+3][y-3] == token):
-                        winner_found = True
-                        break
+                        print_winner(token,
+                                     f'Win found at column:{x} diagonal')
+                        return
                 except IndexError:
-                    continue
+                    pass
                     # check diagonal top right to bottom left
                 try:
                     if (grid[x][y] == token and
                             grid[x-1][y-1] == token and
                             grid[x-2][y-2] == token and
                             grid[x-3][y-3] == token):
-                        winner_found = True
-                        break
+                        print_winner(token,
+                                     f'Win found at column:{x} diagonal')
+                        return
                 except IndexError:
-                    continue
-                if winner_found:
-                    print_winner(token)
-                    return
+                    pass
     change_player()
 
 
@@ -176,7 +176,7 @@ def change_player():
         pc_player_input(False)
 
 
-def print_winner(token):
+def print_winner(token, position):
     """ Print game info for user """
     global player_name
     if token == tokens[0]:
@@ -185,11 +185,13 @@ def print_winner(token):
         winner_text = 'Sorry, you lost'
 
     print(Fore.GREEN + f"""
-    *******************************
-    *******************************
-            {winner_text}
-    *******************************
-    *******************************
+    **************************************
+    **************************************
+                {winner_text}
+
+        {position}
+    **************************************
+    **************************************
         """)
     print(Fore.RESET)
 
