@@ -15,7 +15,7 @@ The live version can be found here: [Connect 4x](https://connect4-2024-a3eeac48a
 Connect 4x is based on a game Connect Four by Milton Bradley in 1974.
 The object of the game is to connect four of your tokens in a row while attempting to block your opponent from doing the same.
 
-You can read more about Connect Four here: [Wikipedea](https://en.wikipedia.org/wiki/Connect_Four)
+You can read more about Connect Four here: [Wikipedia](https://en.wikipedia.org/wiki/Connect_Four)
 
 To play Connect 4x the player must pick a column where they would like to input the token.
 this token will fall to the lowest free position.
