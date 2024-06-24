@@ -20,7 +20,7 @@ def set_game_grid():
         for col in range(columnx_size):
             grid[col][row] = "[_]"
 
-    # add row with column identifers
+    # add row with column identifiers
     for i in range(columnx_size):
         grid[i][6] = f"[{i}]"
 
@@ -64,9 +64,10 @@ def player_input():
     check_column(input_column, 0)
 
 
-def pc_player_input():
+def pc_player_input(retry):
     """ PC player easy setting picks column at random """
-    print_pc_turn()
+    if not retry:
+        print_pc_turn()
     check_column(random.randint(0, 6), 1)
 
 
@@ -77,11 +78,11 @@ def check_column(column, player):
     """
     for i in range(5, -1, -1):
         if (i == 0) and grid[int(column)][i] != "[_]":
-            print(Fore.RED + "this column is full, pick another")
             if player == 0:
+                print(Fore.RED + "this column is full, pick another")
                 player_input()
             else:
-                pc_player_input()
+                pc_player_input(True)
     place_token(column, player)
 
 
@@ -172,7 +173,7 @@ def change_player():
     if current_player == 0:
         player_input()
     else:
-        pc_player_input()
+        pc_player_input(False)
 
 
 def print_winner(token):
